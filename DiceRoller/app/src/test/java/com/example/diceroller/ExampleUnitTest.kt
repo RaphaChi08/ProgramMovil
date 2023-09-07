@@ -1,4 +1,4 @@
-package net.ivanvega.diceroller
+package com.example.diceroller
 
 import org.junit.Test
 
