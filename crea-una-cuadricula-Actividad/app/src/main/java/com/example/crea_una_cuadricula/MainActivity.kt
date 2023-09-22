@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -70,15 +71,40 @@ fun cuadriculaApp(modifier: Modifier = Modifier){
 @Composable
 fun CuadriculaCard(cuadricula: Cuadricula, modifier: Modifier = Modifier){
     Card {
-        Box{
-            Image(
-                painter = painterResource(id = cuadricula.imageRes),
-                contentDescription = null,
-                modifier = modifier
-                    .size(width = 68.dp, height = 68.dp)
-                    .aspectRatio(1f),
-                contentScale = ContentScale.Crop
-            )
+        Row {
+            Box{
+                Image(
+                    painter = painterResource(id = cuadricula.imageRes),
+                    contentDescription = null,
+                    modifier = modifier
+                        .size(width = 68.dp, height = 68.dp)
+                        .aspectRatio(1f),
+                    contentScale = ContentScale.Crop
+                )
+            }
+            Column {
+                Text(
+                    text = stringResource(id = cuadricula.name),
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(
+                        start = dimensionResource(R.dimen.padding_medium),
+                        top = dimensionResource(R.dimen.padding_medium),
+                        end = dimensionResource(R.dimen.padding_medium),
+                        bottom = dimensionResource(R.dimen.padding_small)
+                    )
+                )
+                Row(verticalAlignment = Alignment.CenterVertically){
+                    Icon(
+                        painter = painterResource(R.drawable.ic_grain),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .padding(start = dimensionResource(R.dimen.padding_medium)))
+                    Text(
+                        text = cuadricula.availableCourses.toString(),
+                        style = MaterialTheme.typography.labelMedium,
+                        modifier = Modifier.padding(start = dimensionResource(R.dimen.padding_small)))
+                }
+            }
         }
     }
 }
